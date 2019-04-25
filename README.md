@@ -1,0 +1,1 @@
+Platform that allows better control of banks. Our planform allows ordinary people make bank transactions and banks control this transactions; Control of hole credit system inside one platform.# world-bank
