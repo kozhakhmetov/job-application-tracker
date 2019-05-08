@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ProviderService} from '../services/provider.service';
 
 @Component({
   selector: 'app-add-edit',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddEditComponent implements OnInit {
 
-  constructor() { }
+  companyName: any = '';
+
+  constructor(private provider: ProviderService) { }
 
   ngOnInit() {
+  }
+
+  createCompany() {
+    if (this.companyName !== '') {
+      this.provider.createCompany(this.companyName).then(res => {
+        this.companyName = '';
+        console.log('Company with name:' + res.name + 'created');
+      });
+    }
   }
 
 }
