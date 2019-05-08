@@ -38,7 +38,7 @@ class PositionSerializer(serializers.ModelSerializer):
     link = serializers.CharField(required=True)
     location = serializers.CharField(required=True)
     type = serializers.CharField(required=True)
-    company = serializers.CharField(required=True)
+    company = CompanySerializer()
 
     class Meta:
         model = Position
