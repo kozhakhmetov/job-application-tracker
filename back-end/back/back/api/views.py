@@ -33,24 +33,11 @@ def position(request):
         return Response(serializer.errors)
 
 
-class UserView(APIView):
-    def get_object(self, pk):
-        try:
-           return User.objects.get(id=pk)
-        except  User.DoesNotExist:
-           raise Http404
-
-    def get(self, request, pk):
-        user = self.get_object(pk)
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
-
-
 class CompanyView(APIView):
     def get_object(self, pk):
         try:
            return Company.objects.get(id=pk)
-        except  Company.DoesNotExist:
+        except Company.DoesNotExist:
            raise Http404
 
     def get(self, request, pk):

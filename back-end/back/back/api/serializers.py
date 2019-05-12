@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from api.models import Status, Company, Position, User
+from api.models import Status, Company, Position, CustomUser
+from django.contrib.auth.models import User
 
 
 class StatusSerializer(serializers.Serializer):
@@ -46,16 +47,17 @@ class PositionSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(read_only=True)
-    login = serializers.CharField(required=True)
-    password = serializers.CharField(required=True)
-    lastName = serializers.CharField(required=True)
-    firstName = serializers.CharField(required=True)
-    leetcodeUrl = serializers.CharField(required=True)
 
     class Meta:
         model = User
-        fields = ('id', 'login', 'password', 'lastName', 'firstName', 'leetcodeUrl',)
+        fields = '__all__'
+
+
+class CustomUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CustomUser
+        fields = '__all__'
 
 
 

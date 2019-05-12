@@ -1,11 +1,12 @@
-from django.urls import path, re_path
+from django.urls import path
 from api import views
+from api.view import authViews
 
 urlpatterns = [
     path('status/', views.status),
     path('position/', views.position),
-    re_path(r'user/(\d)/', views.UserView.as_view()),
-    re_path(r'company/(\d)/', views.CompanyView.as_view()),
+    path('company/<int:pk>/', views.CompanyView.as_view()),
     path('company/', views.CompanyView.as_view()),
-
+    # my paths
+    path('users/', authViews.UsersListCreate.as_view())
 ]
