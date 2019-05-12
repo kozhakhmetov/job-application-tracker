@@ -19,17 +19,16 @@ class Status(models.Model):
 # company user
 # every user has their own company list
 # can be modified by user
-# TODO: add created_by field
 
 class Company(models.Model):   # CRUD
     name = models.CharField(max_length=200)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
 
     def __str__(self):
         return '{}: {}'.format(self.id, self.name)
 
 
 # each user creates position to apply
-# TODO: add created_by field
 
 class Position(models.Model):
     name = models.CharField(max_length=200)
@@ -37,17 +36,14 @@ class Position(models.Model):
     location = models.CharField(max_length=200)
     type = models.CharField(max_length=200)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
 
     def __str__(self):
         return '{}: {}: {}: {}: {}'.format(self.name, self.link, self.location, self.type, self.company)
 
 
-class CustomUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    login = models.CharField(max_length=200)
-    password = models.CharField(max_length=200)
-    lastName = models.CharField(max_length=200)
-    firstName = models.CharField(max_length=200)
+class UserInfo(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
     leetcode_url = models.CharField(max_length=200)
 
     def __str__(self):

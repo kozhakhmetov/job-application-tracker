@@ -8,5 +8,5 @@ urlpatterns = [
     path('company/<int:pk>/', views.CompanyView.as_view()),
     path('company/', views.CompanyView.as_view()),
     # my paths
-    path('users/', authViews.UsersListCreate.as_view())
+#    path('users/', authViews.UsersListCreate.as_view())
 ]

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import Status, Company, Position, CustomUser
+from api.models import Status, Company, Position, UserInfo
 from django.contrib.auth.models import User
 
 
@@ -53,10 +53,10 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CustomUserSerializer(serializers.ModelSerializer):
+class UserInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = CustomUser
+        model = UserInfo
         fields = '__all__'
 
 
