@@ -16,7 +16,7 @@ from django.contrib.auth.models import User
 class UsersListCreate(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (AllowAny, ) # TODO: change to Auth
+    permission_classes = (AllowAny, )  # TODO: change to Auth
     required_field_names = ()
 
 

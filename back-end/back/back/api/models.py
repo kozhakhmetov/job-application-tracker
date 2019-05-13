@@ -42,12 +42,10 @@ class Position(models.Model):
         return '{}: {}: {}: {}: {}'.format(self.name, self.link, self.location, self.type, self.company)
 
 
+# addition info
 class UserInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
     leetcode_url = models.CharField(max_length=200)
-
-    def __str__(self):
-        return '{}: {}: {}: {}: {}'.format(self.login, self.password, self.lastName, self.firstName, self.leetcodeUrl)
 
 
 
