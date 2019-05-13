@@ -1,7 +1,16 @@
 from rest_framework import serializers
-from api.models import Status, Company, Position, UserInfo
+from api.models import Status, Company, Position, UserInfo, UserApplication
 from django.contrib.auth.models import User
 
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = '__all__'#('id', 'username', 'first_name', 'last_name', 'email', 'password',)
+
+    def create(self, validated_data):
+        return User.objects.create_user(**validated_data)
 
 class StatusSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
@@ -39,21 +48,12 @@ class PositionSerializer(serializers.ModelSerializer):
     link = serializers.CharField(required=True)
     location = serializers.CharField(required=True)
     type = serializers.CharField(required=True)
-    company = CompanySerializer()
+    company = CompanySerializer(required=False)
+    created_by = UserSerializer(required=False)
 
     class Meta:
         model = Position
-        fields = ('id', 'name', 'link', 'location', 'type', 'company',)
-
-
-class UserSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = '__all__'#('id', 'username', 'first_name', 'last_name', 'email', 'password',)
-
-    def create(self, validated_data):
-        return User.objects.create_user(**validated_data)
+        fields = '__all__'
 
 
 class UserInfoSerializer(serializers.ModelSerializer):
@@ -62,6 +62,16 @@ class UserInfoSerializer(serializers.ModelSerializer):
         model = UserInfo
         fields = '__all__'
 
+
+class UserApplicationSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    position = PositionSerializer()
+    status = StatusSerializer()
+    created_by = UserSerializer(required=False)
+
+    class Meta:
+        model = UserApplication
+        fields = '__all__'
 
 
 

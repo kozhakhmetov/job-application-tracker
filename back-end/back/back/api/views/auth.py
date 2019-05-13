@@ -35,5 +35,3 @@ def logout(request):
     return Response(status=status.HTTP_200_OK)
 
 
-
-

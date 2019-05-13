@@ -9,7 +9,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 
-from api.models import User, Company
+from api.models import User, Company, Status
 from api.serializers import StatusSerializer, PositionSerializer, UserSerializer, CompanySerializer
 
 
@@ -23,12 +23,22 @@ def status(request):
         return Response(serializer.errors)
 
 
+# @api_view(['DELETE'])
+# def del_status(request, pk):
+#    try:
+#         stat = Status.objects.get(id=pk)
+#    except  Status.DoesNotExist as e:
+#        return Response({'error': str(e)}, status=status.HTTP_404_NOT_FOUND)
+#    stat.delete()
+#    return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+
 @api_view(['POST'])
 def position(request):
     if request.method == 'POST':
         serializer = PositionSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(created_by=request.user, company=request.company)
             return Response(serializer.data)
         return Response(serializer.errors)
 
@@ -48,7 +58,7 @@ class CompanyView(APIView):
     def post(self, request):
         serializer = CompanySerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(created_by=self.request.user)
             return Response(serializer.data)
         return Response(serializer.errors)
 

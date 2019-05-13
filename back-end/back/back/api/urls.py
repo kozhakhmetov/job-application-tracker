@@ -1,13 +1,14 @@
 from django.urls import path
-from api import views
-from api.view import authViews
+from api.views import base, auth
 
 urlpatterns = [
-    path('status/', views.status),
-    path('position/', views.position),
-    path('company/<int:pk>/', views.CompanyView.as_view()),
-    path('company/', views.CompanyView.as_view()),
-    # my paths
-    path('users/', authViews.UsersListCreate.as_view()),
-    path('login/', authViews.login)
+    path('status/', base.status),  # CREATE
+    path('company/<int:pk>/', base.CompanyView.as_view()),  # UPDATE, GET, DELETE
+    path('company/', base.CompanyView.as_view()),  # CREATE
+    path('position/', base.position),  # CREATE   TODO send only foreign key
+
+    path('users/', auth.UsersListCreate.as_view()),
+
+    path('login/', auth.login),
+    path('logout/', auth.logout),
 ]
