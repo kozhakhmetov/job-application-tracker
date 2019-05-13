@@ -56,7 +56,6 @@ class UserSerializer(serializers.ModelSerializer):
         return User.objects.create_user(**validated_data)
 
 
-
 class UserInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
