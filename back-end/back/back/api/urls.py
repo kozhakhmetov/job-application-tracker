@@ -4,7 +4,7 @@ from api.views import base, auth
 urlpatterns = [
     path('status/', base.status),  # CREATE
     path('company/<int:pk>/', base.CompanyView.as_view()),  # UPDATE, GET, DELETE
-    path('company/', base.CompanyView.as_view()),  # CREATE
+    path('companies/', base.CompanyView.as_view()),  # CREATE
     path('position/', base.position),  # CREATE   TODO send only foreign key
 
     path('users/', auth.UsersListCreate.as_view()),
