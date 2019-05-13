@@ -50,5 +50,19 @@ class UserInfo(models.Model):
         return '{}: {}: {}: {}: {}'.format(self.login, self.password, self.lastName, self.firstName, self.leetcodeUrl)
 
 
+class Manager(models.Manager):
+    def for_user(self, user):
+        return self.filter(created_by=user)
+
+
+class UserApplication(models.Model):
+    position = models.ForeignKey(Position, on_delete=models.CASCADE)
+    status = models.ForeignKey(Status, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=200)
+    recruiter_contact = models.CharField(max_length=200)
+    applied_at = models.DateTimeField(auto_now=False, editable=True)
+
+    objects = Manager()
 
 

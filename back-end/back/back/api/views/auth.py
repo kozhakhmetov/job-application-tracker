@@ -10,14 +10,12 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.authentication import TokenAuthentication
 from api.models import UserInfo
 from api.serializers import UserSerializer
-from django.contrib.auth.models import User
 
 
-class UsersListCreate(generics.ListCreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (AllowAny, ) # TODO: change to Auth
-    required_field_names = ()
+# class UsersListCreate(generics.ListCreateAPIView):
+#     queryset = CustomUser.objects.all()
+#     serializer_class = CustomUserSerializer
+#     permission_classes = (AllowAny, ) # TODO: change to Auth
 
 
 @api_view(['POST'])
@@ -33,7 +31,5 @@ def login(request):
 def logout(request):
     request.auth.delete()
     return Response(status=status.HTTP_200_OK)
-
-
 
 

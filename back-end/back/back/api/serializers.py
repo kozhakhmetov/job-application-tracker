@@ -39,11 +39,12 @@ class PositionSerializer(serializers.ModelSerializer):
     link = serializers.CharField(required=True)
     location = serializers.CharField(required=True)
     type = serializers.CharField(required=True)
-    company = CompanySerializer()
+    company = CompanySerializer(required=False)
+    created_by = UserSerializer(required=False)
 
     class Meta:
         model = Position
-        fields = ('id', 'name', 'link', 'location', 'type', 'company',)
+        fields = '__all__'
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -62,6 +63,15 @@ class UserInfoSerializer(serializers.ModelSerializer):
         model = UserInfo
         fields = '__all__'
 
+class UserApplicationSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    position = PositionSerializer()
+    status = StatusSerializer()
+    created_by = UserSerializer(required=False)
+
+    class Meta:
+        model = UserApplication
+        fields = '__all__'
 
 
 

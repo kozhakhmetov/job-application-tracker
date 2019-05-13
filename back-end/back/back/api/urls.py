@@ -3,11 +3,13 @@ from api import views
 from api.view import authViews
 
 urlpatterns = [
-    path('status/', views.status),
-    path('position/', views.position),
-    path('company/<int:pk>/', views.CompanyView.as_view()),
-    path('company/', views.CompanyView.as_view()),
-    # my paths
-    path('users/', authViews.UsersListCreate.as_view()),
-    path('login/', authViews.login)
+    path('status/', views.status),  # CREATE
+    path('company/<int:pk>/', views.CompanyView.as_view()),  # UPDATE, GET, DELETE
+    path('company/', views.CompanyView.as_view()),  # CREATE
+    path('position/', views.position),  # CREATE   TODO send only foreign key
+
+    path('users/', views.UsersListCreate.as_view()),
+
+    path('login/', views.login),
+    path('logout/', views.logout),
 ]
